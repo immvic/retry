@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Victor Chironachi | Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio of Victor Chironachi, aspiring engineer focused on robotics, 3D design, and software development."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0f172a;
+        --ink-soft: #334155;
+        --muted: #64748b;
+        --accent: #e11d48;
+        --accent-deep: #be123c;
+        --surface: #ffffff;
+        --surface-soft: #f8fafc;
+        --line: #e2e8f0;
+        --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+        --bg-1: rgba(225, 29, 72, 0.12);
+        --bg-2: rgba(15, 23, 42, 0.08);
+        --bg-3: #fce7f3;
+        --bg-base-1: #f8fafc;
+        --bg-base-2: #ffffff;
+        --grid-1: rgba(225, 29, 72, 0.12);
+        --grid-2: rgba(225, 29, 72, 0.08);
+        --nav-bg: rgba(255, 245, 246, 0.82);
+        --nav-line: rgba(254, 202, 202, 0.6);
+      }
+
+      body.dark {
+        --ink: #e2e8f0;
+        --ink-soft: #cbd5f5;
+        --muted: #9aa4b2;
+        --accent: #f43f5e;
+        --accent-deep: #fb7185;
+        --surface: #0f172a;
+        --surface-soft: #111827;
+        --line: rgba(148, 163, 184, 0.2);
+        --shadow: 0 18px 45px rgba(2, 6, 23, 0.5);
+        --bg-1: rgba(244, 63, 94, 0.2);
+        --bg-2: rgba(0, 0, 0, 0.28);
+        --bg-3: #0b0f1a;
+        --bg-base-1: #05060a;
+        --bg-base-2: #0a0f1f;
+        --grid-1: rgba(244, 63, 94, 0.2);
+        --grid-2: rgba(244, 63, 94, 0.1);
+        --nav-bg: rgba(9, 13, 26, 0.82);
+        --nav-line: rgba(244, 63, 94, 0.2);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Outfit", system-ui, sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 12% 8%, var(--bg-1), transparent 38%),
+          radial-gradient(circle at 85% 12%, var(--bg-2), transparent 45%),
+          linear-gradient(
+            180deg,
+            var(--bg-base-1) 0%,
+            var(--bg-base-2) 55%,
+            var(--bg-3) 100%
+          );
+        line-height: 1.6;
+        position: relative;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(var(--grid-1) 1px, transparent 1px),
+          linear-gradient(90deg, var(--grid-2) 1px, transparent 1px);
+        background-size: 34px 34px;
+        pointer-events: none;
+        opacity: 0.25;
+        z-index: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .page {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 1.5rem 5rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(14px);
+        background: var(--nav-bg);
+        border-bottom: 1px solid var(--nav-line);
+      }
+
+      .nav-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0.85rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .brand {
+        font-family: "DM Serif Display", serif;
+        font-size: 1.25rem;
+        letter-spacing: 0.02em;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 1rem;
+        font-size: 0.95rem;
+        align-items: center;
+      }
+
+      .nav-links a {
+        padding: 0.35rem 0.75rem;
+        border-radius: 999px;
+        color: var(--ink-soft);
+      }
+
+      .nav-links a.active,
+      .nav-links a:hover {
+        background: rgba(225, 29, 72, 0.12);
+        color: var(--accent-deep);
+      }
+
+      .theme-toggle {
+        border: 1px solid var(--line);
+        background: var(--surface);
+        color: var(--ink-soft);
+        padding: 0.35rem 0.8rem;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+
+      .theme-toggle:hover {
+        color: var(--accent-deep);
+        border-color: rgba(244, 63, 94, 0.35);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+        gap: 2rem;
+        align-items: center;
+        padding: 4rem 0 3rem;
+      }
+
+      .hero h1 {
+        font-family: "DM Serif Display", serif;
+        font-size: clamp(2.4rem, 5vw, 3.6rem);
+        line-height: 1.1;
+        margin: 0 0 1rem;
+      }
+
+      .hero p {
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+
+      .hero-cta {
+        margin-top: 1.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.9rem;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.9rem;
+        width: 100%;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.3rem;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .btn.primary {
+        background: var(--accent);
+        color: white;
+        box-shadow: 0 12px 25px rgba(225, 29, 72, 0.28);
+      }
+
+      .btn.secondary {
+        background: var(--surface);
+        border-color: var(--line);
+        color: var(--ink-soft);
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .hero-card {
+        background: var(--surface);
+        border-radius: 1.6rem;
+        padding: 1.4rem;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(226, 232, 240, 0.7);
+      }
+
+      .hero-photo {
+        border-radius: 1.3rem;
+        aspect-ratio: 4 / 5;
+        object-fit: cover;
+      }
+
+      .section {
+        margin-top: 3.2rem;
+      }
+
+      .section h2 {
+        font-size: clamp(1.5rem, 2.6vw, 2rem);
+        margin: 0 0 1.2rem;
+      }
+
+      .section p {
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        gap: 1.2rem;
+      }
+
+      .grid.two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .card {
+        background: var(--surface);
+        border-radius: 1.2rem;
+        padding: 1.3rem;
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+      }
+
+      .pill {
+        display: inline-block;
+        padding: 0.3rem 0.7rem;
+        border-radius: 999px;
+        background: rgba(225, 29, 72, 0.12);
+        color: var(--accent-deep);
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .experience-item {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .experience-item h3 {
+        margin: 0;
+        font-size: 1.05rem;
+      }
+
+      .meta {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .skills {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .skills ul {
+        margin: 0.6rem 0 0;
+        padding-left: 1.1rem;
+        color: var(--muted);
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .contact-card {
+        display: grid;
+        gap: 0.4rem;
+        padding: 1.1rem;
+        border-radius: 1rem;
+        border: 1px solid var(--line);
+        background: var(--surface-soft);
+      }
+
+      footer {
+        margin-top: 4rem;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        .grid.two {
+          grid-template-columns: 1fr;
+        }
+
+        .skills {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .nav-links {
+          flex-wrap: wrap;
+          justify-content: flex-end;
+        }
+
+        .skills {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-cta {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="nav-inner">
+        <div class="brand">Victor Chironachi</div>
+        <div class="nav-links">
+          <a href="#hero">Home</a>
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
+          <button class="theme-toggle" type="button" aria-pressed="false">
+            Dark Mode
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="page">
+      <section id="hero" class="hero">
+        <div>
+          <span class="pill">Aspiring Engineer</span>
+          <h1>
+            Building robotics and 3D design solutions with growing software
+            expertise.
+          </h1>
+          <p>
+            I am Victor Chironachi, an aspiring engineer focused on robotics, 3D
+            design, and software development. I enjoy solving complex technical
+            problems through creative design, hardware integration, and rapid
+            prototyping.
+          </p>
+          <div class="hero-cta">
+            <div class="cta-row">
+              <a class="btn primary" href="#contact">Contact Me</a>
+              <a class="btn secondary" href="#experience">View Experience</a>
+            </div>
+            <div class="cta-row">
+              <a class="btn secondary" href="assets/cv-en.pdf" download>
+                Download CV (EN)
+              </a>
+              <a class="btn secondary" href="assets/cv-ro.pdf" download>
+                Download CV (RO)
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <img
+            class="hero-photo"
+            src="assets/victor-photo.png"
+            alt="Portrait of Victor Chironachi"
+          />
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <h2>About Me</h2>
+        <div class="grid two">
+          <div class="card">
+            <p>
+              Detail-oriented engineer with a strong foundation in robotics and 3D
+              design, currently expanding expertise in software development and
+              programming logic. I focus on practical prototypes that connect
+              hardware and software into reliable systems.
+            </p>
+          </div>
+          <div class="card">
+            <p>
+              Based in Cahul, Moldova. I am passionate about open-source hardware,
+              competitive coding, and drone photography. My work emphasizes
+              precision, clear documentation, and continuous learning.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience" class="section">
+        <h2>Experience</h2>
+        <div class="grid">
+          <article class="card experience-item">
+            <div class="pill">2023 - 2024</div>
+            <h3>Junior Robotics Technician — TechNova Solutions</h3>
+            <p class="meta">Robotics assembly, calibration, and integration</p>
+            <ul>
+              <li>
+                Assisted in the assembly and calibration of automated robotic arms
+                for industrial testing.
+              </li>
+              <li>
+                Collaborated with the design team to refine 3D-printed components,
+                reducing material waste by 15%.
+              </li>
+              <li>
+                Troubleshot hardware connectivity issues to ensure seamless
+                integration with control software.
+              </li>
+            </ul>
+          </article>
+
+          <article class="card experience-item">
+            <div class="pill">2022 - 2023</div>
+            <h3>Design Intern — Creative Dynamics</h3>
+            <p class="meta">3D modeling and prototype documentation</p>
+            <ul>
+              <li>
+                Drafted detailed 3D models for prototype parts using
+                industry-standard design software.
+              </li>
+              <li>
+                Maintained and operated high-precision 3D printers, ensuring all
+                output met quality benchmarks.
+              </li>
+              <li>
+                Documented technical specifications for internal hardware projects.
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="skills" class="section">
+        <h2>Skills</h2>
+        <div class="skills">
+          <article class="card">
+            <h3>Technical</h3>
+            <ul>
+              <li>3D Modeling (CAD)</li>
+              <li>Robotics Assembly</li>
+              <li>Circuit Design</li>
+              <li>Basic Programming (Python/C++)</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Soft Skills</h3>
+            <ul>
+              <li>Creative Problem Solving</li>
+              <li>Rapid Learning</li>
+              <li>Collaborative Teamwork</li>
+              <li>Adaptability</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Languages</h3>
+            <ul>
+              <li>Romanian (Fluent)</li>
+              <li>Russian (Fluent)</li>
+              <li>English (Proficient)</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <h2>Contact</h2>
+        <p>Open to internships, junior roles, and collaborative projects.</p>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <strong>Email</strong>
+            <a href="mailto:victoraschironachi@email.com"
+              >victoraschironachi@email.com</a
+            >
+          </div>
+          <div class="contact-card">
+            <strong>Phone</strong>
+            <a href="tel:+37368264178">+373 682 641 78</a>
+          </div>
+          <div class="contact-card">
+            <strong>Location</strong>
+            <span>Cahul, Moldova</span>
+          </div>
+        </div>
+      </section>
+
+      <footer>© 2026 Victor Chironachi. All rights reserved.</footer>
+    </main>
+
+    <script>
+      const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
+      const sections = navLinks
+        .map((link) => document.querySelector(link.getAttribute("href")))
+        .filter(Boolean);
+
+      const toggle = document.querySelector(".theme-toggle");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const storedTheme = localStorage.getItem("theme");
+      const startDark = storedTheme
+        ? storedTheme === "dark"
+        : prefersDark;
+
+      document.body.classList.toggle("dark", startDark);
+      if (toggle) {
+        toggle.setAttribute("aria-pressed", String(startDark));
+        toggle.textContent = startDark ? "Light Mode" : "Dark Mode";
+        toggle.addEventListener("click", () => {
+          const isDark = document.body.classList.toggle("dark");
+          toggle.setAttribute("aria-pressed", String(isDark));
+          toggle.textContent = isDark ? "Light Mode" : "Dark Mode";
+          localStorage.setItem("theme", isDark ? "dark" : "light");
+        });
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              navLinks.forEach((link) => link.classList.remove("active"));
+              const active = navLinks.find(
+                (link) => link.getAttribute("href") === `#${entry.target.id}`
+              );
+              if (active) {
+                active.classList.add("active");
+              }
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      sections.forEach((section) => observer.observe(section));
+    </script>
+  </body>
+</html>
